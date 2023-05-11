@@ -26,14 +26,39 @@ class Playlist{
         return playlists
     }
 
-    static show(data){
-        let datajson = this.getPlaylist(data)
+    static show(){
+        let datajson = this.getPlaylist()
         console.log(datajson)
+       
+
         
     }
 
     static add(params){
-        let datajson = JSON.parse(fs.readFileSync(data,'utf-8'))
-    }
+        // let datajson = JSON.parse(fs.readFileSync(data,'utf-8'))
+        let playlists = this.getPlaylist() //class has attribute , if array can be pushed data manipulation can not be done 
+                                    // foreach only be done in 
+        const [name, genre, duration, playlistName] = params
+        playlists.forEach(playlist =>{
+            console.log(name)
+            console.log(genre)
+            // console.log([playlist.name])
+            console.log(playlistName)
+            if(playlist.name === playlistName){
+                let id = playlist.songs[playlist.songs.length-1].id+1;
+                if(genre === 'Pop'){
+                    playlist.songs.push(new Pop(id, name, duration)) //push new class
+                }
+                else {
+                    playlist.songs.push(new Rock(id, name, duration))
+                }
+
+            }
+            console.log(playlists)
+        })
+        // playlists.forEach(element => {
+            
+        // });
+    } 
 }
 module.exports = Playlist

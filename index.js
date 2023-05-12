@@ -8,6 +8,7 @@ switch(command)
         break;
 
     case 'remove':
+        console.log(params)
         PlaylistController.remove(params)
         break;
 

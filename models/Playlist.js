@@ -23,15 +23,16 @@ class Playlist{
                 })
                 return new Playlist(id, name, songs)
          })
-        return playlists
+        return playlists   
     }
 
     static show(){
         let datajson = this.getPlaylist()
-        console.log(datajson)
-       
+        console.log(datajson) 
+    }
 
-        
+    static save(datauhuy){
+       fs.writeFileSync(data,JSON.stringify(datauhuy))
     }
 
     static add(params){
@@ -40,25 +41,47 @@ class Playlist{
                                     // foreach only be done in 
         const [name, genre, duration, playlistName] = params
         playlists.forEach(playlist =>{
-            console.log(name)
-            console.log(genre)
-            // console.log([playlist.name])
-            console.log(playlistName)
-            if(playlist.name === playlistName){
-                let id = playlist.songs[playlist.songs.length-1].id+1;
+            if(playlist.name === playlistName){//playlist class, playlists array
+                let id 
+                if (playlist.songs.length === 0){
+                     id =1
+                }else{
+                     id = playlist.songs[playlist.songs.length-1].id+1;
+                }
                 if(genre === 'Pop'){
                     playlist.songs.push(new Pop(id, name, duration)) //push new class
                 }
                 else {
                     playlist.songs.push(new Rock(id, name, duration))
                 }
-
             }
-            console.log(playlists)
+            this.save(playlists)
         })
-        // playlists.forEach(element => {
-            
-        // });
     } 
-}
+    static create(params){
+            let playlists = this.getPlaylist()
+            // console.log(playlists)
+            let id = playlists[playlists.length -1].id +1
+            let [name] = params;
+            playlists.push(new Playlist(id, name))
+            this.save(playlists)
+ // playlists.push(new Playlist)
+
+    }
+    static remove(params){
+        let playlists = this.getPlaylist()
+        const [songName, playlistName] = params
+        playlists = playlists.map(playlist=>{
+            if (playlistName === playlist.name){
+                playlist.songs = playlist.songs.filter(song => song.name !== songName)
+                console.log(playlist)
+                return playlist
+            }
+        else{
+            return playlist
+             }
+        })
+            this.save(playlists)
+     }
+    }
 module.exports = Playlist

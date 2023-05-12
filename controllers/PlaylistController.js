@@ -10,11 +10,11 @@ class PlaylistController{
     static add(params){
         Playlist.add(params)
     }
-    static remove(){
-
+    static remove(params){
+        Playlist.remove(params)
     }
-    static create(){
-
+    static create(params){
+        Playlist.create(params)
     }
 }
 

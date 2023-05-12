@@ -41,13 +41,12 @@ class Playlist{
                                     // foreach only be done in 
         const [name, genre, duration, playlistName] = params
         playlists.forEach(playlist =>{
-            if(playlist.name === playlistName){//playlist class, playlists array
-                let id 
-                if (playlist.songs.length === 0){
-                     id =1
-                }else{
-                     id = playlist.songs[playlist.songs.length-1].id+1;
-                }
+            console.log(name)
+            console.log(genre)
+            // console.log([playlist.name])
+            console.log(playlistName)
+            if(playlist.name === playlistName){
+                let id = playlist.songs[playlist.songs.length-1].id+1;
                 if(genre === 'Pop'){
                     playlist.songs.push(new Pop(id, name, duration)) //push new class
                 }
